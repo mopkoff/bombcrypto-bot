@@ -1,0 +1,116 @@
+﻿// RECORDED SCRIPT 18.11.2021
+// waitms correction
+$S_CORR = 0
+$var = 0
+$interval_base_sec = 60
+$attempts_before_force = 10
+$attempts = 10
+
+WHILE($var < 5)
+LOGWRITE("Переменная $attempts = ", $attempts)
+
+GETSCREEN
+IF(($attempts >= $attempts_before_force) or (PXL (419, 547) == 8388607))    
+LOGWRITE("Основной цикл")
+
+waitms(116 + $S_CORR)
+move(88,64)
+                  
+// wait connect wallet button
+waitms(1160 + $S_CORR)
+GETSCREEN
+WHILE((PXL (392, 708) ! 8355839) and (PXL (392, 758) ! 8388607)) 
+   WAITMS (100)
+   GETSCREEN
+END_CYC
+     
+waitms(116 + $S_CORR)                 
+   move(270, 670)
+waitms(234 + $S_CORR)                 
+   lDown(270, 670)
+waitms(122 + $S_CORR)                
+   lUp(270, 670)
+   
+// wait MetaMask button
+waitms(1160 + $S_CORR)
+GETSCREEN
+WHILE((PXL (387, 591) ! 8355839) and (PXL (385, 602) ! 8388607)) 
+   WAITMS (100)
+   GETSCREEN
+END_CYC
+
+waitms(116 + $S_CORR)                 
+   move(266, 512)
+waitms(234 + $S_CORR)                 
+   lDown(266, 512)
+waitms(122 + $S_CORR)                
+   lUp(266, 512)  
+   
+// wait MetaMask popup
+GETSCREEN
+WHILE(PXL (812, 560) ! 16744319) 
+   WAITMS (100)
+   GETSCREEN
+END_CYC
+
+waitms(116 + $S_CORR)                 
+   move(576, 554)
+waitms(234 + $S_CORR)                 
+   lDown(576, 554)
+waitms(122 + $S_CORR)                
+   lUp(576, 554) 
+	  
+waitms(1160 + $S_CORR)                 
+   move(576, 554)
+waitms(234 + $S_CORR)                 
+   lDown(576, 554)
+waitms(122 + $S_CORR)                
+   lUp(576, 554)'
+   
+// wait main load
+GETSCREEN
+WHILE(PXL (907, 756) ! 8355839) 
+   WAITMS (100)
+   GETSCREEN
+END_CYC
+
+waitms(116 + $S_CORR)                 
+   move(907, 776)
+waitms(234 + $S_CORR)                 
+   lDown(907, 776)
+waitms(122 + $S_CORR)                
+   lUp(907, 776) 
+   
+// wait characters tab load
+GETSCREEN
+WHILE(PXL (922, 400) ! 8355839) 
+   WAITMS (100)
+   GETSCREEN
+END_CYC
+
+waitms(116 + $S_CORR)                 
+   move(583, 459)
+waitms(234 + $S_CORR)                 
+   lDown(583, 459)
+waitms(122 + $S_CORR)                
+   lUp(583, 459)
+waitms(122 + $S_CORR)   	  
+   wheeldown (100)  
+waitms(116 + $S_CORR)                 
+   move(413, 761)
+   
+FOR($a=0,$a<15)
+waitms(1005 + $S_CORR)                 
+   lDown(413, 761)
+waitms(122 + $S_CORR)                
+   lUp(413, 761)
+END_CYC
+	 	  	  	 	  	  
+END_IF
+$attempts = $attempts + 1
+WAIT($interval_base_sec)
+
+END_CYC
+
+  
+// FINISH AT 1:36:14

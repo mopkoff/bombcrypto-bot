@@ -1,0 +1,205 @@
+﻿// RECORDED SCRIPT 18.11.2021
+// waitms correction
+$S_CORR = 0
+$var = 0
+$interval_base_sec = 60
+$attempts_before_force = 50
+$retry_interval_ms = 100
+$retry_attempt_max = 100 //actual timeout in milliseconds is $retry_interval_ms * $retry_attempt_max  
+    
+start:    
+$retry_attempt = 0
+$attempts = 0
+WHILE($var < 5)
+LOGWRITE("Переменная $attempts = ", $attempts)
+
+GETSCREEN
+COLORMODE(7)
+IF((($attempts >= $attempts_before_force)) or ((PXL (422, 730) == 8355839) and (PXL (422, 760) == 8388607)))    
+LOGWRITE("Основной цикл")
+$attempts = 0
+waitms(116 + $S_CORR)
+   move(88,64) 
+waitms(234 + $S_CORR)                 
+   lDown(88,64)
+waitms(122 + $S_CORR)                
+   lUp(88,64)
+THREAD(name, 1)
+   // тело
+END_THREAD
+                  
+// wait connect wallet button
+waitms(1160 + $S_CORR)
+GETSCREEN 
+COLORMODE(7)
+WHILE((PXL (392, 708) ! 8355839) and (PXL (392, 758) ! 8388607))       
+   LOGWRITE("Ожидание коннекта:", $retry_attempt) 
+   $retry_attempt = $retry_attempt + 1
+      IF($retry_attempt = $retry_attempt_max)
+      LOGWRITE("Таймаут, возврат в начало:", $retry_attempt)
+      goto(start)
+      END_IF
+   WAITMS ($retry_interval)
+   GETSCREEN 
+   COLORMODE(7)
+END_CYC
+$retry_attempt = 0
+     
+waitms(116 + $S_CORR)                 
+   move(392, 708)
+waitms(234 + $S_CORR)                 
+   lDown(392, 708)
+waitms(122 + $S_CORR)                
+   lUp(392, 708)
+   
+// wait MetaMask button
+waitms(1160 + $S_CORR)
+GETSCREEN 
+COLORMODE(7)
+WHILE((PXL (385, 591) ! 8355839) and (PXL (385, 602) ! 8388607))   
+   LOGWRITE("Ожидание метамаска:", $retry_attempt)
+   $retry_attempt = $retry_attempt + 1
+      IF($retry_attempt = $retry_attempt_max)
+      LOGWRITE("Таймаут, возврат в начало:", $retry_attempt)
+      goto(start)
+      END_IF
+   WAITMS ($retry_interval)
+   GETSCREEN 
+   COLORMODE(7)
+END_CYC
+$retry_attempt = 0
+
+waitms(116 + $S_CORR)                 
+   move(387, 591)
+waitms(234 + $S_CORR)                 
+   lDown(387, 591)
+waitms(122 + $S_CORR)                
+   lUp(387, 591)  
+   
+// wait MetaMask popup
+GETSCREEN
+COLORMODE(7)
+WHILE(PXL (812, 560) ! 16744319) 
+   LOGWRITE("Ожидание попапа метамаска:", $retry_attempt)
+   $retry_attempt = $retry_attempt + 1
+      IF($retry_attempt = $retry_attempt_max)
+      LOGWRITE("Таймаут, возврат в начало:", $retry_attempt)
+      goto(start)
+      END_IF
+   WAITMS ($retry_interval)
+   GETSCREEN 
+   COLORMODE(7)
+END_CYC
+$retry_attempt = 0
+
+waitms(116 + $S_CORR)                 
+   move(812, 560)
+waitms(234 + $S_CORR)                 
+   lDown(812, 560)
+waitms(122 + $S_CORR)                
+   lUp(812, 560) 
+	  
+waitms(1160 + $S_CORR)                 
+   move(812, 560)
+waitms(234 + $S_CORR)                 
+   lDown(812, 560)
+waitms(122 + $S_CORR)                
+   lUp(812, 560)'
+   
+// wait main load
+GETSCREEN 
+COLORMODE(7)
+WHILE(PXL (907, 756) ! 8355839) 
+   LOGWRITE("Ожидание приложения:", $retry_attempt)
+   $retry_attempt = $retry_attempt + 1
+      IF($retry_attempt = $retry_attempt_max)
+      LOGWRITE("Таймаут, возврат в начало:", $retry_attempt)
+      goto(start)
+      END_IF
+   WAITMS ($retry_interval)
+   GETSCREEN 
+   COLORMODE(7)
+END_CYC
+$retry_attempt = 0
+
+waitms(116 + $S_CORR)                 
+   move(907, 776)
+waitms(234 + $S_CORR)                 
+   lDown(907, 776)
+waitms(122 + $S_CORR)                
+   lUp(907, 776) 
+   
+// wait characters tab load
+GETSCREEN 
+COLORMODE(7)
+WHILE(PXL (412, 378) ! 8388607) 
+   LOGWRITE("Ожидание вкладки персонажей:", $retry_attempt)
+   $retry_attempt = $retry_attempt + 1
+      IF($retry_attempt = $retry_attempt_max)
+      LOGWRITE("Таймаут, возврат в начало:", $retry_attempt)
+      goto(start)
+      END_IF
+   WAITMS ($retry_interval)
+   GETSCREEN 
+   COLORMODE(7)
+END_CYC
+$retry_attempt = 0
+
+waitms(116 + $S_CORR)                 
+   move(323, 554)
+waitms(234 + $S_CORR)                 
+   lDown(323, 554)
+waitms(122 + $S_CORR)                
+   lUp(323, 554) 
+             
+LOGWRITE("Прокрутка вниз")
+// scroll down   
+FOR($a=0,$a<75)
+waitms(60 + $S_CORR)   	  
+   wheeldown (100) 
+END_CYC   
+             
+LOGWRITE("Отправка работяг...")
+
+$rabotyaga_num = 0
+GETSCREEN
+COLORMODE(7)  
+WHILE(PXL (397, 748) == 8388479)       
+   lDown(397, 748)
+waitms(122 + $S_CORR)                
+   lUp(397, 748) 
+$rabotyaga_num = $rabotyaga_num + 1
+LOGWRITE("Работяга отправлен: ", $rabotyaga_num)   
+WAITMS (1000)
+GETSCREEN
+COLORMODE(7) 
+END_CYC   
+
+	          
+LOGWRITE("Вовзрат в меню")
+// main menu
+waitms(116 + $S_CORR)                 
+   move(555, 366)
+waitms(234 + $S_CORR)                 
+   lDown(555, 366)
+waitms(122 + $S_CORR)                
+   lUp(555, 366)
+	                     
+// go to hunt
+LOGWRITE("Запуск работы")
+getscreen
+IF_PICTURE_IN (300,300, 700, 700, "pics/startGame.bmp")
+ move($_return1+100, $_return2+150)
+END_IF
+
+	 	 	 	  	  	 	  	  
+END_IF
+$attempts = $attempts + 1  
+LOGWRITE("Ожидание :", $attempts)
+LOGWRITE("Перезапуск при достижении :", $attempts_before_force)
+WAIT($interval_base_sec)  
+
+END_CYC
+
+  
+// FINISH AT 1:36:14
