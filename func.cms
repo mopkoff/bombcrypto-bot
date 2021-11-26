@@ -70,4 +70,3 @@ END_CYC
 reboot_if_false()
 logwrite("to menu..")
 goto(menu)   
-
