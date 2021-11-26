@@ -62,9 +62,9 @@ sub(prepare_window, $title)
 end_sub
 
 sub(scroll_down, $filename, $interval, $times)
-   logwrite("Started scrolling ", $times, " times")   
+   logwrite("Started scrolling")   
    WNDBUMP($current_hwid)       
-   
+   wait_pic_and_click($filename, $interval, $times)
    waitms(122) 	
    	      
    for($b=0,$b<50)  

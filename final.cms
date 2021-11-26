@@ -3,6 +3,7 @@
 #logfile "debug.txt"  
 #include "func.cms"
 
+logwrite("123")
 $return_1 = -1                    
 
 wait_pic_and_click("startGame.bmp", 5000, 3)
