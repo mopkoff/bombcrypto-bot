@@ -1,7 +1,26 @@
 ﻿// 18.11.2021
 $current_hwid = 0
 sub(wait_pic_and_click, $filename, $interval, $times)
-   wait_pic_and_click_shifted($filename, $interval, $times, 0, 0)
+   $check = 0
+   $count = 0 
+   WAITMS(250)
+   WHILE(($check = 0) and ($count < $times))
+      $count = $count + 1
+      GETSCREEN
+      IF_PICTURE_IN (0, 0, $_xmax, $_ymax, StrConcat("pics\", $filename))
+         $check = 1   
+         WAITMS(500)     
+         LCLICK($_return1 + 1, $_return2 + 1)
+         LOGWRITE("Found: ", $filename)      
+         LOGWRITE("at ", $_return1 + 1, ":", $_return2 + 1)
+				 $return_1 = 1  
+         WAITMS(1000)     
+      ELSE
+         LOGWRITE("Waiting for: ", $filename, " ", $count, " of ", $times)
+         WAITMS($interval)
+				 $return_1 = 0         
+      END_IF
+   END_CYC
 end_sub
 
 sub(wait_pic_and_click_shifted, $filename, $interval, $times, $xs, $ys)

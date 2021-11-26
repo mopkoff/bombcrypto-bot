@@ -1,1 +1,0 @@
-26.11.2021 6:27:48 Thread _MAIN(0) raise exception 

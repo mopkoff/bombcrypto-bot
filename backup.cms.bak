@@ -3,7 +3,12 @@
 #logfile "debug.txt"  
 #include "func.cms"
 
-$return_1 = -1                    
+$current_hwid = 0    
+$return_1 = -1    
+$d_x = 0
+$d_y = 0                              
+
+
 
 wait_pic_and_click("startGame.bmp", 5000, 3)
 IF($return_1 = 0)               
