@@ -3,9 +3,9 @@
 #logfile "debug.txt"  
 #include "func.cms"
 
-logwrite("123")
 $return_1 = -1                    
-
+                           
+prepare_window("Bombcrypto")
 wait_pic_and_click("startGame.bmp", 5000, 3)
 IF($return_1 = 0)               
    goto(start)
@@ -14,8 +14,8 @@ IF($return_1 = 1)
    goto(menu2)
 END_IF 
 start: 
-                                            
-prepare_window("Bombcrypto")              
+                           
+prepare_window("Bombcrypto")                               
 wait_pic_and_click("reboot.bmp", 5000, 3)   
 wait_pic_and_click("connect.bmp", 5000, 3)   
 //wait_pic_and_click("meta1.bmp", 5000, 3) 
@@ -38,13 +38,16 @@ END_IF
 menu2:                           
 wait_pic_and_click("down.bmp", 1000, 3) 
 wait_pic_and_click("heroes.bmp", 1000, 3)        
-wait_pic_and_scroll("heroes_home.bmp", 1000, 3)
-WHILE($return_1 ! 0)    
-   wait_pic_and_click("work.bmp", 1000, 3)
-   IF($return_1 ! 0)
-      wait_pic_and_click_shifted("heroes_home.bmp", 1000, 3, -100, 10)
-   END_IF    
-   wait_pic_and_click("work.bmp", 1000, 3)
+wait_pic_and_scroll("heroes_home.bmp", 1000, 10)
+
+//WHILE($return_1 ! 0)  
+//   wait_pic_and_click("work.bmp", 1000, 3)  
+//END_CYC
+
+$i1_max = 15
+FOR($i1=0,$i1<$i1_max) 
+   lclick(450,780) 
+	 waitms(500) 
 END_CYC
 
 wait_pic_and_click("close.bmp", 1000, 3)  
@@ -66,4 +69,5 @@ END_CYC
 reboot_if_false()
 logwrite("to menu..")
 goto(menu)   
+
 
